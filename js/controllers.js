@@ -1,8 +1,77 @@
 angular.module('SimpleRESTIonic.controllers', [])
 
-    .controller('LoginCtrl', function (Backand, $state, $rootScope, LoginService) {
+    .controller('CheckinCtrl', function (Backand, $state, $rootScope, LoginService) {
         var login = this;
+        
+        // debugger
+        
+        // social.setFbKey({appId: '415413948489755'}); //, apiVersion: '2'
+        function signin() {
+            LoginService.signin(login.email, login.password)
+                .then(function () {
+                    onLogin();
+                }, function (error) {
+                    console.log(error)
+                })
+        }
 
+        function anonymousLogin() {
+            LoginService.anonymousLogin();
+            onLogin();
+        }
+
+        function onLogin() {
+            $rootScope.$broadcast('authorized');
+            $state.go('tab.dashboard');
+            login.username = Backand.getUsername();
+    }
+
+        function signout() {
+            LoginService.signout()
+                .then(function () {
+                    //$state.go('tab.login');
+                    $rootScope.$broadcast('logout');
+                    $state.go($state.current, {}, {reload: true});
+                })
+
+        }
+
+        function socialSignIn(provider) {
+            debugger
+            LoginService.socialSignIn(provider)
+                .then(onValidLogin, onErrorInLogin);
+
+        }
+
+        function socialSignUp(provider) {
+            LoginService.socialSignUp(provider)
+                .then(onValidLogin, onErrorInLogin);
+
+        }
+
+        onValidLogin = function(response){
+            onLogin();
+            login.username = response.data;
+        }
+
+        onErrorInLogin = function(rejection){
+            login.error = rejection.data;
+            $rootScope.$broadcast('logout');
+
+        }
+
+
+        login.username = '';
+        login.error = '';
+        login.signin = signin;
+        login.signout = signout;
+        login.anonymousLogin = anonymousLogin;
+        login.socialSignup = socialSignUp;
+        login.socialSignin = socialSignIn;
+
+    })
+    .controller('LoginCtrl', function (Backand, $state, $rootScope, LoginService, socialProvider) {
+        var login = this;
         function signin() {
             LoginService.signin(login.email, login.password)
                 .then(function () {
