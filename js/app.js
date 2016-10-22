@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'SimpleRESTIonic' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('SimpleRESTIonic', ['ionic', 'backand', 'SimpleRESTIonic.controllers', 'SimpleRESTIonic.services'])
+angular.module('SimpleRESTIonic', ['ionic', 'ion-sticky', 'formlyIonic', 'backand', 'SimpleRESTIonic.controllers', 'SimpleRESTIonic.services'])
 
     /*   .run(function (, Backand) {
 
@@ -43,6 +43,24 @@ angular.module('SimpleRESTIonic', ['ionic', 'backand', 'SimpleRESTIonic.controll
                     }
                 }
             })
+            .state('tab.something', {
+                url: '/else',
+                views: {
+                    'tab-login': {
+                        templateUrl: 'templates/tab-login.html',
+                        controller: 'LoginCtrl as login'
+                    }
+                }
+            })
+            .state('tab.formcreator', {
+                url: '/form',
+                views: {
+                    'tab-formcreator': {
+                        templateUrl: 'templates/tab-formcreator.html',
+                        controller: 'FormCreatorCtrl as vm'
+                    }
+                }
+            })
             .state('tab.signup', {
                 url: '/signup',
                 views: {
@@ -54,7 +72,7 @@ angular.module('SimpleRESTIonic', ['ionic', 'backand', 'SimpleRESTIonic.controll
             }
         );
 
-        $urlRouterProvider.otherwise('/tabs/dashboard');
+        $urlRouterProvider.otherwise('/tabs/form');
         $httpProvider.interceptors.push('APIInterceptor');
     })
 

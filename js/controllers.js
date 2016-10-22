@@ -200,5 +200,57 @@ angular.module('SimpleRESTIonic.controllers', [])
         initCreateForm();
         getAll();
 
-    });
+    })
 
+    .controller('FormCreatorCtrl', function (ItemsModel, $rootScope, $scope) {
+      $scope.data = {
+        showDelete: false
+      }
+      $scope.openModal = function() {
+        $scope.modal.show();
+      };
+      $scope.closeModal = function() {
+        $scope.modal.hide();
+      };
+      // Cleanup the modal when we're done with it!
+      $scope.$on('$destroy', function() {
+        $scope.modal.remove();
+      });
+      $scope.delete = function(item) {
+        $scope.questions.append(item);
+      }
+      $scope.moveItem = function(item, fromIndex, toIndex) {
+        $scope.questions.splice(fromIndex, 1);
+        $scope.questions.splice(toIndex, 0, item);
+      };
+      $scope.delete = function(item) {
+        $scope.questions.splice($scope.items.indexOf(item), 1);
+      }
+      $scope.questions = [{"_id" : "1234", "content" : "Do you have a permanent address", "tags" : "Address"}, {"_id" : "1235", "content" : "When was your last meal", "tags" : "Meal" }];
+      $scope.formData = {};
+      $scope.formFields = [
+   {
+     key: 'text',
+     type: 'input',
+     templateOptions: {
+       type:'text',
+       placeholder: 'Enter a new form question here!'
+     }
+   },
+   {
+     key: 'text',
+     type: 'input',
+     templateOptions: {
+       type:'text',
+       placeholder: 'Enter tags here'
+     }
+   },
+   {
+     key: 'toggle',
+     type: 'toggle',
+     templateOptions: {
+       label: 'Is this a True/False question?',
+       toggleClass:"assertive"
+     }
+   }];
+    });
