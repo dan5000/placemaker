@@ -1,0 +1,49 @@
+<ion-view class="padding" view-title='<img class="title-image" src="img/logoside.png" />'>
+    <ion-content class="padding has-header">
+        <div class="bar bar-header">
+            
+        </div>
+        <div class="bar bar-subheader">
+
+            <div class="card">
+                <div class="button-bar">
+                    <button class="button button-positive icon-left ion-social-facebook" ng-click="login.socialSignin('facebook')" type="button">
+                        Checkin With Facebook
+                    </button>
+                </div>
+            </div>
+
+            <form ng-submit="login.signin()">
+
+                <div class="list padding-top">
+
+                    <div class="card">
+                        <div class="item item-divider">
+                            or use a Placemaker Profile
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label class="item item-input">
+                                    <input id="firstname" name="firstname" type="text" placeholder="Your first name" ng-model="checkin.fname">
+                                </label>
+                                <label class="item item-input">
+                                    <input id="lastname" name="lastname" type="text" placeholder="Your Last name" ng-model="checkin.lname">
+                                </label>
+                                <label class="item item-input">
+                                    <input id="lastname" name="lastname" type="number" placeholder="The last 4 digits of your social" ng-model="checkin.ssn">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="">
+                        <button class="button button-block button-calm" type="submit">
+                            Checkin
+                        </button>
+                    </div>
+
+                </form>
+                <h4 style="color:red;" ng-bind="checkin.error"></h4>
+            </div>
+        </ion-content>
+    </ion-view>
