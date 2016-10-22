@@ -20,6 +20,11 @@ angular.module('SimpleRESTIonic', ['ionic', 'ion-sticky', 'formlyIonic', 'backan
 
         $stateProvider
             // setup an abstract state for the tabs directive
+            .state('checkin', {
+                url: '/checkin',
+                abstract: false,
+                templateUrl: 'templates/checkin.html'
+            })
             .state('tab', {
                 url: '/tabs',
                 abstract: true,
