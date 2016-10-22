@@ -1,6 +1,6 @@
 angular.module('starter.services', [])
 
-    .service('CoCs', function ($http) {
+    .service('CoCs', function ($http, $q) {
         var service = this,
             baseUrl = '/api/coc/';
 
