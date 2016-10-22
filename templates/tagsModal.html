@@ -1,0 +1,18 @@
+<body ng-controller="FormCreatorCtrl">
+<ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-positive">
+    <h1 class="title">{{question.content}}</h1>
+    <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+  </ion-header-bar>
+  <ion-content class="padding">
+    <ion-item ng-repeat="tag in question.tags">
+      {{tag}}
+    </ion-item>
+    <form>
+      <formly-form model="tagData" fields="tagFields">
+         <button type="submit" class="button button-block" ng-click="addTag(question)">Add Tag</button>
+      </formly-form>
+    </form>
+  </ion-content>
+</ion-modal-view>
+</body>

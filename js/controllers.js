@@ -202,11 +202,26 @@ angular.module('SimpleRESTIonic.controllers', [])
 
     })
 
-    .controller('FormCreatorCtrl', function (ItemsModel, $rootScope, $scope) {
+    .controller('FormCreatorCtrl', function (ItemsModel, $rootScope, $scope, $ionicModal) {
+      var options = [
+        {"name": "Text", "value": "String"},
+        {"name": "Number", "value": "Double"},
+        {"name": "Date", "value": "DateTime"},
+        {"name": "True/False", "value": "Boolean"},
+        {"name": "E-Mail", "value": "email"}
+      ];
+
       $scope.data = {
         showDelete: false
       }
-      $scope.openModal = function() {
+      $ionicModal.fromTemplateUrl('templates/tagsModal.html', {
+        scope: $scope,
+        animation: 'slide-in-up',
+      }).then(function(modal) {
+        $scope.modal = modal;
+      });
+      $scope.openModal = function(question) {
+        $scope.question = question;
         $scope.modal.show();
       };
       $scope.closeModal = function() {
@@ -216,21 +231,44 @@ angular.module('SimpleRESTIonic.controllers', [])
       $scope.$on('$destroy', function() {
         $scope.modal.remove();
       });
-      $scope.delete = function(item) {
-        $scope.questions.append(item);
+      $scope.add = function() {
+        var data = $scope.formData;
+        var tags = data.tags.split(" ")
+        var item = {"content" : data.question, "tags" : tags };
+        $scope.questions.push(item);
+        $scope.formData = {};
       }
+
       $scope.moveItem = function(item, fromIndex, toIndex) {
         $scope.questions.splice(fromIndex, 1);
         $scope.questions.splice(toIndex, 0, item);
       };
       $scope.delete = function(item) {
-        $scope.questions.splice($scope.items.indexOf(item), 1);
+        $scope.questions.splice($scope.questions.indexOf(item), 1);
       }
-      $scope.questions = [{"_id" : "1234", "content" : "Do you have a permanent address", "tags" : "Address"}, {"_id" : "1235", "content" : "When was your last meal", "tags" : "Meal" }];
+      $scope.questions = [{"_id" : "1234", "content" : "When was the last time you ate a home-cooked meal", "tags" : ["Address",  "Meals"]}, {"_id" : "1235", "content" : "When was your last meal", "tags" : ["Meal"] }];
+      $scope.tagData = {};
+      $scope.tagFields = [{
+        key: 'text',
+        type: 'input',
+        templateOptions: {
+          type:'text',
+          placeholder: 'Enter a new tag here!'
+        }
+      }];
+      $scope.save = function() {
+        console.log($scope.questions)
+        //api post
+      }
+      $scope.addTag = function(question) {
+        var tag = $scope.tagData.text;
+        question.tags.push(tag);
+        $scope.tagData = {};
+      }
       $scope.formData = {};
       $scope.formFields = [
    {
-     key: 'text',
+     key: 'question',
      type: 'input',
      templateOptions: {
        type:'text',
@@ -238,19 +276,21 @@ angular.module('SimpleRESTIonic.controllers', [])
      }
    },
    {
-     key: 'text',
+     key: 'tags',
      type: 'input',
      templateOptions: {
        type:'text',
-       placeholder: 'Enter tags here'
+       placeholder: 'Enter tags here. Separate multiple tags by spaces.'
      }
    },
    {
      key: 'toggle',
-     type: 'toggle',
+     type: 'select',
+     defaultValue: "Text",
      templateOptions: {
-       label: 'Is this a True/False question?',
-       toggleClass:"assertive"
+       type:'ion-select',
+       label: 'What kind of response are you looking for?',
+       options: options
      }
-   }];
+  }];
     });
