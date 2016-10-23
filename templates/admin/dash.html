@@ -8,5 +8,10 @@
     </div>
     <h2>Who's Here</h2>
     <h2>Occupancy</h2>
+    <div ng-repeat="person in persons">
+       <!-- <ion-icon ios="ios-person" md="md-person"></ion-icon> -->
+       <img src="http://www.freeiconspng.com/uploads/person-outline-icon-png-person-outline-icon-png-person-17.png" style="width:30px;"/>
+      <a ui-sref="persondetail({_id:person._id})">
+         {{person.fname}}</a></div>
   </ion-content>
 </ion-view>
