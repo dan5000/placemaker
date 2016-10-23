@@ -1,0 +1,25 @@
+{
+  "name": "placemaker",
+  "homepage": "https://github.com/dan5000/placemaker",
+  "authors": [
+    "Allen Hao <allen.hao@wustl.edu>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "client/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-formly-templates-ionic": "^1.2.2",
+    "api-check": "^7.5.5",
+    "angular-formly": "^8.4.0",
+    "angular": "^1.5.8",
+    "ion-sticky": "^1.0.7"
+  }
+}

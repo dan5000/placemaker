@@ -1,0 +1,37 @@
+<ion-view title="FormCreator" id="page3">
+  <ion-content padding="true" class="has-header" ion-sticky>
+    <form >
+        <formly-form model="formData" fields="formFields">
+           <button type="submit" class="button button-block" ng-click="add()">Add Question</button>
+        </formly-form>
+
+
+    </form>
+
+    <div class="item-divider button-bar">
+      <div class="buttons">
+        <button class="button button-icon icon ion-ios-minus-outline"
+          ng-click="data.showDelete = !data.showDelete; data.showReorder = false"></button>
+      </div>
+      <h1 class="title button">Current Form</h1>
+      <div class="buttons">
+        <button class="button" ng-click="data.showDelete = false; data.showReorder = !data.showReorder">
+            Reorder
+        </button>
+      </div>
+    </div>
+
+    <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
+      <ion-item ng-repeat="question in questions">
+        <ion-delete-button class="ion-minus-circled" ng-click="delete(question)"></ion-delete-button>
+        <button class="button" ng-click="openModal(question)">{{question.content}}</button>
+        <ion-reorder-button class="ion-navicon" on-reorder="moveItem(question, $fromIndex, $toIndex)"></ion-reorder-button>
+      </ion-item>
+    </ion-list>
+    <button class="button button-block bar-assertive" ng-click="save()">Save</button>
+  </ion-content>
+</ion-view>
+
+<script id="my-modal.html" type="text/ng-template">
+
+</script>

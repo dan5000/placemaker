@@ -3,21 +3,21 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'SimpleRESTIonic' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('SimpleRESTIonic', ['ionic', 'SimpleRESTIonic.controllers', 'SimpleRESTIonic.services'])
+angular.module('SimpleRESTIonic', ['ionic', 'ion-sticky', 'formlyIonic', 'SimpleRESTIonic.controllers', 'SimpleRESTIonic.services'])
 
     /*   .run(function (, Backand) {
 
      })
      */
-    .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
+    .config(function (BackandProvider, $stateProvider, $urlRouterProvider, $httpProvider) {
         // change here to your appName
-        // BackandProvider.setAppName('here2');
-        // 
-        // BackandProvider.setSignUpToken('eeeac4e6-b7bc-4552-88ff-a424c50ead61');
-        // 
-        // // token is for anonymous login. see http://docs.backand.com/en/latest/apidocs/security/index.html#anonymous-access
-        // BackandProvider.setAnonymousToken('86d665e8-bb1c-4290-a124-2a80baac405d');
-        // 
+        BackandProvider.setAppName('here2');
+
+        BackandProvider.setSignUpToken('eeeac4e6-b7bc-4552-88ff-a424c50ead61');
+
+        // token is for anonymous login. see http://docs.backand.com/en/latest/apidocs/security/index.html#anonymous-access
+        BackandProvider.setAnonymousToken('86d665e8-bb1c-4290-a124-2a80baac405d');
+        
         ///here2 secret d8f405a8e74ed77e0652cecf37ee6a3f  ID 415413948489755
 
         $stateProvider
@@ -51,6 +51,24 @@ angular.module('SimpleRESTIonic', ['ionic', 'SimpleRESTIonic.controllers', 'Simp
                     }
                 }
             })
+            .state('tab.something', {
+                url: '/else',
+                views: {
+                    'tab-login': {
+                        templateUrl: 'templates/tab-login.html',
+                        controller: 'LoginCtrl as login'
+                    }
+                }
+            })
+            .state('tab.formcreator', {
+                url: '/form',
+                views: {
+                    'tab-formcreator': {
+                        templateUrl: 'templates/tab-formcreator.html',
+                        controller: 'FormCreatorCtrl as vm'
+                    }
+                }
+            })
             .state('tab.signup', {
                 url: '/signup',
                 views: {
@@ -62,11 +80,11 @@ angular.module('SimpleRESTIonic', ['ionic', 'SimpleRESTIonic.controllers', 'Simp
             }
         );
 
-        $urlRouterProvider.otherwise('/tabs/dashboard');
+        $urlRouterProvider.otherwise('/tabs/form');
         $httpProvider.interceptors.push('APIInterceptor');
     })
 
-    .run(function ($ionicPlatform, $rootScope, $state, LoginService) {
+    .run(function ($ionicPlatform, $rootScope, $state, LoginService, Backand) {
 
         $ionicPlatform.ready(function () {
 
@@ -84,8 +102,8 @@ angular.module('SimpleRESTIonic', ['ionic', 'SimpleRESTIonic.controllers', 'Simp
 
 
             var isMobile = !(ionic.Platform.platforms[0] == "browser");
-            // Backand.setIsMobile(isMobile);
-            // Backand.setRunSignupAfterErrorInSigninSocial(true);
+            Backand.setIsMobile(isMobile);
+            Backand.setRunSignupAfterErrorInSigninSocial(true);
         });
 
         function unauthorized() {
@@ -105,9 +123,9 @@ angular.module('SimpleRESTIonic', ['ionic', 'SimpleRESTIonic.controllers', 'Simp
             if (toState.name == 'tab.login') {
                 signout();
             }
-            // else if (toState.name != 'tab.login' && Backand.getToken() === undefined) {
-            //     unauthorized();
-            // }
+            else if (toState.name != 'tab.login' && Backand.getToken() === undefined) {
+                unauthorized();
+            }
         });
 
     })
