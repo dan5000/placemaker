@@ -5,10 +5,8 @@ angular.module('SimpleRESTIonic.controllers', [])
     function checkin() {
         CheckinService.checkin($scope.form)
             .then(function () {
-                debugger
                 onLogin();
             }, function (error) {
-                debugger
                 console.log(error);
             });
     }
