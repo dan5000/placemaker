@@ -1,27 +1,20 @@
 angular.module('SimpleRESTIonic.controllers', [])
 
-    .controller('CheckinCtrl', function ( $state, $rootScope,     .service('CheckinService', function ($http) {
-) {
+    .controller('CheckinCtrl', function ( $state, $rootScope, CheckinService) {
         var checkin = this;
         
         // debugger
         
         // social.setFbKey({appId: '415413948489755'}); //, apiVersion: '2'
-        function signin() {
-            LoginService.signin(checkin.fname, checkin.lname, checkin.ssn)
+        function checkin() {
+            CheckinService.checkin(checkin.fname, checkin.lname, checkin.ssn)
                 .then(function () {
                     debugger
                     onLogin();
                 }, function (error) {
-                    console.log(error)
-                })
+                    console.log(error);
+                });
         }
-
-        function anonymousLogin() {
-            LoginService.anonymousLogin();
-            onLogin();
-        }
-
         function onLogin() {
             $rootScope.$broadcast('authorized');
             debugger
@@ -29,44 +22,44 @@ angular.module('SimpleRESTIonic.controllers', [])
             // login.username = Backand.getUsername();
     }
 
-        function signout() {
-            LoginService.signout()
-                .then(function () {
-                    //$state.go('tab.login');
-                    $rootScope.$broadcast('logout');
-                    $state.go($state.current, {}, {reload: true});
-                })
+        // function signout() {
+        //     LoginService.signout()
+        //         .then(function () {
+        //             //$state.go('tab.login');
+        //             $rootScope.$broadcast('logout');
+        //             $state.go($state.current, {}, {reload: true});
+        //         })
+        // 
+        // }
 
-        }
+        // function socialSignIn(provider) {
+        //     debugger
+        //     LoginService.socialSignIn(provider)
+        //         .then(onValidLogin, onErrorInLogin);
+        // 
+        // }
+        // 
+        // function socialSignUp(provider) {
+        //     LoginService.socialSignUp(provider)
+        //         .then(onValidLogin, onErrorInLogin);
+        // 
+        // }
 
-        function socialSignIn(provider) {
-            debugger
-            LoginService.socialSignIn(provider)
-                .then(onValidLogin, onErrorInLogin);
-
-        }
-
-        function socialSignUp(provider) {
-            LoginService.socialSignUp(provider)
-                .then(onValidLogin, onErrorInLogin);
-
-        }
-
-        onValidLogin = function(response){
-            onLogin();
-            login.username = response.data;
-        }
-
-        onErrorInLogin = function(rejection){
-            login.error = rejection.data;
-            $rootScope.$broadcast('logout');
-
-        }
+        // onValidLogin = function(response){
+        //     onLogin();
+        //     login.username = response.data;
+        // }
+        // 
+        // onErrorInLogin = function(rejection){
+        //     login.error = rejection.data;
+        //     $rootScope.$broadcast('logout');
+        // 
+        // }
 
 
         checkin.username = '';
         checkin.error = '';
-        checkin.signin = signin;
+        checkin.checkin = checkin;
         checkin.signout = signout;
         checkin.anonymousLogin = anonymousLogin;
         checkin.socialSignup = socialSignUp;

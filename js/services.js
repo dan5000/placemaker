@@ -45,13 +45,12 @@ angular.module('SimpleRESTIonic.services', [])
         };
     })
 
-    .service('LoginService', function () {
+    .service('CheckinService', function ($http) {
         var service = this;
 
-
-        service.anonymousLogin= function(){
-            // don't have to do anything here,
-            // because we set app token att app.js
+        
+        service.checkin= function(data, config){
+            $http.post('/test', data, config).then(successCallback, errorCallback);
         }
 
     

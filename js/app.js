@@ -76,7 +76,7 @@ angular.module('SimpleRESTIonic', ['ionic', 'ion-sticky', 'formlyIonic', 'Simple
         $httpProvider.interceptors.push('APIInterceptor');
     })
 
-    .run(function ($ionicPlatform, $rootScope, $state, LoginService) {
+    .run(function ($ionicPlatform, $rootScope, $state, CheckinService) {
 
         $ionicPlatform.ready(function () {
 
