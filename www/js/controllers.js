@@ -3,10 +3,11 @@ angular.module('starter.controllers', [])
 .controller('DashCtrl', function($scope) {})
 
 .controller('ChatsCtrl', function($scope, CoCs) {
-  $scope.$on('$ionicView.enter', function(e) {
-    CoCs.all().then(res => {
-      $scope.chats = res.data;
-    });
+  // use this to rerun query every time view is clicked
+  //$scope.$on('$ionicView.enter', function(e) {
+  //});
+  CoCs.all().then(res => {
+    $scope.chats = JSON.parse(res.data);
   });
 })
 
