@@ -1,0 +1,8 @@
+<ion-view title="Forms" id="page3">
+  <ion-content padding="true" class="has-header">
+    <ion-item>My Forms</ion-item>
+    <ion-item ng-repeat="form in forms track by $index">
+      <button class="button button-block" ng-click="gotoForm(form)">{{form.title}}</button>
+    </ion-item>
+  </ion-content>
+</ion-view>
