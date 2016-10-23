@@ -65,17 +65,17 @@ angular.module('SimpleRESTIonic', ['ionic', 'ion-sticky', 'formlyIonic', 'Simple
         }
       }
     })
-    .state('tab.something', {
-      url: '/else',
+    .state('tab.forms', {
+      url: '/forms',
       views: {
-        'tab-login': {
-          templateUrl: 'templates/tab-login.html',
-          controller: 'LoginCtrl as login'
+        'tab-forms': {
+          templateUrl: 'templates/tab-forms.html',
+          controller: 'FormCtrl'
         }
       }
     })
     .state('tab.formcreator', {
-      url: '/form',
+      url: '/editform?:id',
       views: {
         'tab-formcreator': {
           templateUrl: 'templates/tab-formcreator.html',

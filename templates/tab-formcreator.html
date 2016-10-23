@@ -13,7 +13,7 @@
         <button class="button button-icon icon ion-ios-minus-outline"
           ng-click="data.showDelete = !data.showDelete; data.showReorder = false"></button>
       </div>
-      <h1 class="title button">Current Form</h1>
+      <h1 class="title button">{{form.title}}</h1>
       <div class="buttons">
         <button class="button" ng-click="data.showDelete = false; data.showReorder = !data.showReorder">
             Reorder
@@ -32,6 +32,3 @@
   </ion-content>
 </ion-view>
 
-<script id="my-modal.html" type="text/ng-template">
-
-</script>

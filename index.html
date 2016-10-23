@@ -138,3 +138,60 @@
 
 </body>
 </html>
+<script>
+var success = function(locationData){
+    console.log('locationData object', locationData);
+    var xhttp = new XMLHttpRequest();
+    var coords = locationData.coords, 
+      loc = 'accuracy=' + coords.accuracy + '&' + 
+      'lat='  + coords.latitude  + '&' +  
+      'lng=' + coords.longitude;
+
+    xhttp.open("GET", '/api?' + loc, true);
+    xhttp.send();
+  },
+  error = function(error){
+      switch(error.code) {
+          case error.PERMISSION_DENIED:
+              alert("User denied the request for Geolocation.");
+              break;
+          case error.POSITION_UNAVAILABLE:
+              alert("Location information is unavailable.");
+              break;
+          case error.TIMEOUT:
+              alert("The request to get user location timed out.");
+              break;
+          case error.UNKNOWN_ERROR:
+              alert("An unknown error occurred.");
+              break;
+      }
+    promptAdd(); //TODO move this to success 
+  };
+  
+  function promptAdd(){
+    debugger
+  }
+
+  var opts ={
+    enableHighAccuracy: true, 
+    maximumAge        : 30000, 
+    timeout           : 27000
+  };
+  
+  if (navigator.geolocation) {
+    <!-- navigator.geolocation.getCurrentPosition(success, error, opts);  -->
+    
+  } else {
+    error('not supported');
+  }
+  
+  function showAdd(){
+    document.getElementById('find').style.display = 'none';
+    document.getElementById('add').style.display = 'block';
+    
+    // debugger
+    
+    
+    
+  }
+  </script>
