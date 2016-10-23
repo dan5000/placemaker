@@ -1,17 +1,24 @@
 <ion-view view-title="Dashboard">
   <ion-content class="padding">
-    <h2>Alerts</h2>
+    <!-- <h2>Alerts</h2>
     <div class="card">
       <div class="item item-text-wrap">
         This is a basic Card which contains an item that has wrapping text.
       </div>
-    </div>
+    </div> -->
     <h2>Who's Here</h2>
-    <h2>Occupancy</h2>
-    <div ng-repeat="person in persons">
+    <ul class="list" ng-repeat="person in persons">
+      <!-- {{person}} -->
        <!-- <ion-icon ios="ios-person" md="md-person"></ion-icon> -->
-       <img src="http://www.freeiconspng.com/uploads/person-outline-icon-png-person-outline-icon-png-person-17.png" style="width:30px;"/>
-      <a ui-sref="persondetail({_id:person._id})">
-         {{person.fname}}</a></div>
+       <!-- <img src="http://www.freeiconspng.com/uploads/person-outline-icon-png-person-outline-icon-png-person-17.png" style="width:30px;height:30px;"/> -->
+      <!-- <a ui-sref="persondetail({_id:person._id})"></a> -->
+         
+         <li class="item">
+           {{person.name_info.first_name}}
+         {{person.name_info.middle_name}}
+         {{person.name_info.last_name}}
+         <button class="button" ng-click="text(person.$uuid)">text</button>  
+    </li>
+</ul>
   </ion-content>
 </ion-view>

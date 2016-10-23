@@ -10,7 +10,18 @@ angular.module('SimpleRESTIonic.services', [])
             return $q.reject(response);
         };
     })
+    .service('Text', function ($http) {
+        var service = this;
 
+        service.send = function (msg, name, number) {
+            
+              return $http.get('http://localhost:5000/api/message/'+msg+'/'+name+'/'+number);
+                
+                // return $http.post('/test', data);//.then(function, errorCallback);
+            
+        };
+    })
+    
     .service('ItemsModel', function ($http) {
         var service = this,
             baseUrl = '/1/objects/',

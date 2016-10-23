@@ -29,11 +29,45 @@ $scope.fname = 'atatat';
 
 })
 
-.controller('AdminDashCtrl', function (Persons, $rootScope, $scope) {
+.controller('AdminDashCtrl', function (Persons, $rootScope, $scope, Text) {
     var vm = this;
     Persons.all()
         .then(function (result) {
-            $scope.persons = JSON.parse(result.data);
+            // $scope.persons = JSON.parse(result);
+            $scope.persons = result.data;
+        });
+    
+    // 
+    // $rootScope.$on('authorized', function () {
+    //     vm.isAuthorized = true;
+    //     getAll();
+    // });
+    //
+    Text.send('hello','all',3146804864);
+        
+
+})
+
+.controller('AdminCommunityCtrl', function (Persons, $rootScope, $scope) {
+    var vm = this;
+    Persons.all()
+        .then(function (result) {
+            // $scope.persons = JSON.parse(result.data);
+            $scope.persons = [
+                {name:'joe'},
+                {name:'joe'},
+                {name:'joe'},
+                {name:'joe'},
+                {name:'joe'},
+                {name:'joe'},
+                {name:'joe'},
+                {name:'joe'},
+                {name:'joe'},
+                {name:'joe'},
+                {name:'joe'},
+                {name:'joe'},
+                {name:'joe'}
+            ]
         });
 
     // 

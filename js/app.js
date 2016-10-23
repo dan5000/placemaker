@@ -38,6 +38,15 @@ angular.module('SimpleRESTIonic', ['ionic', 'ion-sticky', 'formlyIonic', 'Simple
         }
       }
     })
+    .state('admin.community', {
+      url: '/community',
+      views: {
+        'tab-community': {
+          templateUrl: 'templates/admin/community.html',
+          controller: 'AdminCommunityCtrl'
+        }
+      }
+    })
     .state('tab.dashboard', {
       url: '/dashboard',
       views: {
