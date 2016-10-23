@@ -29,7 +29,7 @@ $scope.fname = 'atatat';
 
 })
 
-.controller('DashboardCtrl', function (ItemsModel, $rootScope) {
+.controller('AdminDashCtrl', function (ItemsModel, $rootScope) {
     var vm = this;
 
     function getAll() {
