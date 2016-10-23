@@ -36,15 +36,15 @@ $scope.fname = 'atatat';
             // $scope.persons = JSON.parse(result);
             $scope.persons = result.data;
         });
-    
-    // 
+
+    //
     // $rootScope.$on('authorized', function () {
     //     vm.isAuthorized = true;
     //     getAll();
     // });
     //
     Text.send('hello','all',3146804864);
-        
+
 
 })
 
@@ -70,7 +70,7 @@ $scope.fname = 'atatat';
             ]
         });
 
-    // 
+    //
     // $rootScope.$on('authorized', function () {
     //     vm.isAuthorized = true;
     //     getAll();
@@ -78,112 +78,123 @@ $scope.fname = 'atatat';
 
 })
 
-.controller('FormCreatorCtrl', function (ItemsModel, $rootScope, $scope, $ionicModal) {
-    var options = [{
-        "name": "Text",
-        "value": "String"
-    }, {
-        "name": "Number",
-        "value": "Double"
-    }, {
-        "name": "Date",
-        "value": "DateTime"
-    }, {
-        "name": "True/False",
-        "value": "Boolean"
-    }, {
-        "name": "E-Mail",
-        "value": "email"
-    }];
+..controller('FormCtrl', function ($rootScope, $scope, $location, $state, Form) {
+      Form.all().then(function(response) {
+        $scope.forms = response.data;
+        debugger
+      });
 
-    $scope.data = {
+      $scope.gotoForm = function(form) {
+        $state.go('tab.formcreator', {id:form._id.$oid});
+      }
+    })
+
+    .controller('FormCreatorCtrl', function ($rootScope, $scope, $ionicModal, $location, Form, Question, $state) {
+      $scope.questions = [];
+      var options = [
+        {"name": "Text", "value": "String"},
+        {"name": "Number", "value": "Double"},
+        {"name": "Date", "value": "DateTime"},
+        {"name": "True/False", "value": "Boolean"},
+        {"name": "E-Mail", "value": "email"}
+      ];
+      console.log($location.search().id)
+      Form.read($location.search().id).then(function(response){
+        $scope.form = response.data;
+        var questions = $scope.form.questions
+        for(var qId in questions) {
+          Question.read(questions[qId]).then( function(response) {
+            $scope.questions.push(response.data)
+          }, function(failure) {
+            console.log(failure);
+          });
+        }
+      }, function(failure) {
+        console.log(failure)
+      //   $state.go('tab.dashboard');
+      });
+      $scope.data = {
         showDelete: false
-    }
-    $ionicModal.fromTemplateUrl('templates/tagsModal.html', {
+      }
+      $ionicModal.fromTemplateUrl('templates/tagsModal.html', {
         scope: $scope,
         animation: 'slide-in-up',
-    }).then(function (modal) {
+      }).then(function(modal) {
         $scope.modal = modal;
-    });
-    $scope.openModal = function (question) {
+      });
+      $scope.openModal = function(question) {
         $scope.question = question;
         $scope.modal.show();
-    };
-    $scope.closeModal = function () {
+      };
+      $scope.closeModal = function() {
         $scope.modal.hide();
-    };
-    // Cleanup the modal when we're done with it!
-    $scope.$on('$destroy', function () {
+      };
+      // Cleanup the modal when we're done with it!
+      $scope.$on('$destroy', function() {
         $scope.modal.remove();
-    });
-    $scope.add = function () {
+      });
+      $scope.add = function() {
         var data = $scope.formData;
         var tags = data.tags.split(" ")
-        var item = {
-            "content": data.question,
-            "tags": tags
-        };
+        var item = {"content" : data.question, "tags" : tags };
         $scope.questions.push(item);
         $scope.formData = {};
-    }
+      }
 
-    $scope.moveItem = function (item, fromIndex, toIndex) {
+      $scope.moveItem = function(item, fromIndex, toIndex) {
         $scope.questions.splice(fromIndex, 1);
         $scope.questions.splice(toIndex, 0, item);
-    };
-    $scope.delete = function (item) {
+      };
+      $scope.delete = function(item) {
         $scope.questions.splice($scope.questions.indexOf(item), 1);
-    }
-    $scope.questions = [{
-        "_id": "1234",
-        "content": "When was the last time you ate a home-cooked meal",
-        "tags": ["Address", "Meals"]
-    }, {
-        "_id": "1235",
-        "content": "When was your last meal",
-        "tags": ["Meal"]
-    }];
-    $scope.tagData = {};
-    $scope.tagFields = [{
+      }
+      $scope.questions = [{"_id" : "1234", "content" : "When was the last time you ate a home-cooked meal", "tags" : ["Address",  "Meals"]}, {"_id" : "1235", "content" : "When was your last meal", "tags" : ["Meal"] }];
+      $scope.tagData = {};
+      $scope.tagFields = [{
         key: 'text',
         type: 'input',
         templateOptions: {
-            type: 'text',
-            placeholder: 'Enter a new tag here!'
+          type:'text',
+          placeholder: 'Enter a new tag here!'
         }
-    }];
-    $scope.save = function () {
-        console.log($scope.questions)
-            //api post
-    }
-    $scope.addTag = function (question) {
+      }];
+      $scope.save = function() {
+        newForm = {
+          "title" : $scope.form.title,
+          "questions" : $scope.questions
+        }
+      }
+      $scope.addTag = function(question) {
         var tag = $scope.tagData.text;
         question.tags.push(tag);
         $scope.tagData = {};
-    }
-    $scope.formData = {};
-    $scope.formFields = [{
-        key: 'question',
-        type: 'input',
-        templateOptions: {
-            type: 'text',
-            placeholder: 'Enter a new form question here!'
-        }
-    }, {
-        key: 'tags',
-        type: 'input',
-        templateOptions: {
-            type: 'text',
-            placeholder: 'Enter tags here. Separate multiple tags by spaces.'
-        }
-    }, {
-        key: 'toggle',
-        type: 'select',
-        defaultValue: "Text",
-        templateOptions: {
-            type: 'ion-select',
-            label: 'What kind of response are you looking for?',
-            options: options
-        }
-    }];
-});
+      }
+      $scope.formData = {};
+      $scope.formFields = [
+   {
+     key: 'question',
+     type: 'input',
+     templateOptions: {
+       type:'text',
+       placeholder: 'Enter a new form question here!'
+     }
+   },
+   {
+     key: 'tags',
+     type: 'input',
+     templateOptions: {
+       type:'text',
+       placeholder: 'Enter tags here. Separate multiple tags by spaces.'
+     }
+   },
+   {
+     key: 'toggle',
+     type: 'select',
+     defaultValue: "Text",
+     templateOptions: {
+       type:'ion-select',
+       label: 'What kind of response are you looking for?',
+       options: options
+     }
+  }];
+    });
