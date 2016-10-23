@@ -4,18 +4,24 @@
    <img style="width: 50%;padding-top: 6px;" src="img/logoside.svg">
 </ion-nav-title>
     <ion-content class="padding has-header">
+      
+      <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+      </fb:login-button>
+
+      <div id="status">
+      </div>
         <div class="bar bar-header">
             
         </div>
         <div class="bar bar-subheader">
 
-            <div class="card">
+            <!-- <div class="card">
                 <div class="button-bar">
                     <button class="button button-positive icon-left ion-social-facebook" ng-click="checkin.socialSignin('facebook')" type="button">
                         Checkin With Facebook
                     </button>
                 </div>
-            </div>
+            </div> -->
 
             <form ng-submit="login.signin()">
 
@@ -23,7 +29,7 @@
 
                     <div class="card">
                         <div class="item item-divider has-title">
-                            <h5 class="title padding-bottom">or use a Placemaker Profile</h5>
+                            <h5 class="title padding-bottom">Please Checkin</h5>
                             <p></o>
                         </div>
                         <div class="row">

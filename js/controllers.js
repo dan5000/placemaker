@@ -1,6 +1,6 @@
 angular.module('SimpleRESTIonic.controllers', [])
 
-    .controller('CheckinCtrl', function (Backand, $state, $rootScope, LoginService) {
+    .controller('CheckinCtrl', function ( $state, $rootScope, LoginService) {
         var login = this;
         
         // debugger
@@ -23,7 +23,7 @@ angular.module('SimpleRESTIonic.controllers', [])
         function onLogin() {
             $rootScope.$broadcast('authorized');
             $state.go('tab.dashboard');
-            login.username = Backand.getUsername();
+            // login.username = Backand.getUsername();
     }
 
         function signout() {
@@ -70,7 +70,7 @@ angular.module('SimpleRESTIonic.controllers', [])
         login.socialSignin = socialSignIn;
 
     })
-    .controller('LoginCtrl', function (Backand, $state, $rootScope, LoginService, socialProvider) {
+    .controller('LoginCtrl', function ($state, $rootScope, LoginService, socialProvider) {
         var login = this;
         function signin() {
             LoginService.signin(login.email, login.password)
@@ -89,7 +89,7 @@ angular.module('SimpleRESTIonic.controllers', [])
         function onLogin() {
             $rootScope.$broadcast('authorized');
             $state.go('tab.dashboard');
-            login.username = Backand.getUsername();
+            // login.username = Backand.getUsername();
     }
 
         function signout() {
@@ -136,7 +136,7 @@ angular.module('SimpleRESTIonic.controllers', [])
 
     })
 
-    .controller('SignUpCtrl', function (Backand, $state, $rootScope, LoginService) {
+    .controller('SignUpCtrl', function ( $state, $rootScope, LoginService) {
         var vm = this;
 
         vm.signup = signUp;
@@ -175,10 +175,6 @@ angular.module('SimpleRESTIonic.controllers', [])
 
     .controller('DashboardCtrl', function (ItemsModel, $rootScope) {
         var vm = this;
-
-        function goToBackand() {
-            window.location = 'http://docs.backand.com';
-        }
 
         function getAll() {
             ItemsModel.all()
@@ -250,7 +246,6 @@ angular.module('SimpleRESTIonic.controllers', [])
         vm.isCurrent = isCurrent;
         vm.cancelEditing = cancelEditing;
         vm.cancelCreate = cancelCreate;
-        vm.goToBackand = goToBackand;
         vm.isAuthorized = false;
 
         $rootScope.$on('authorized', function () {

@@ -18,7 +18,7 @@
     <!-- cordova script (this will be a 404 during development) -->
     <!-- <script src="cordova.js"></script> -->
 
-    <script src="lib/angularbknd-sdk/dist/backand.debug.js"></script>
+    <!-- <script src="lib/angularbknd-sdk/dist/backand.debug.js"></script> -->
 
 
     <!-- your app's js -->
@@ -74,10 +74,10 @@
       statusChangeCallback(response);
     });
   }
-
+/////here2 secret d8f405a8e74ed77e0652cecf37ee6a3f  ID 415413948489755
   window.fbAsyncInit = function() {
   FB.init({
-    appId      : '{your-app-id}',
+    appId      : '415413948489755',
     cookie     : true,  // enable cookies to allow the server to access 
                         // the session
     xfbml      : true,  // parse social plugins on this page
@@ -129,11 +129,7 @@
   the FB.login() function when clicked.
 -->
 
-<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-</fb:login-button>
 
-<div id="status">
-</div>
 
 
 </body>
