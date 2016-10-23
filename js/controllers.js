@@ -78,10 +78,9 @@ $scope.fname = 'atatat';
 
 })
 
-..controller('FormCtrl', function ($rootScope, $scope, $location, $state, Form) {
+.controller('FormCtrl', function ($rootScope, $scope, $location, $state, Form) {
       Form.all().then(function(response) {
         $scope.forms = response.data;
-        debugger
       });
 
       $scope.gotoForm = function(form) {
