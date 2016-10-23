@@ -47,6 +47,15 @@ angular.module('SimpleRESTIonic', ['ionic', 'ion-sticky', 'formlyIonic', 'Simple
         }
       }
     })
+    .state('admin.survey', {
+      url: '/survey',
+      views: {
+        'tab-survey': {
+          templateUrl: 'templates/admin/survey.html',
+          controller: 'SurveyCtrl'
+        }
+      }
+    })
     .state('tab.dashboard', {
       url: '/dashboard',
       views: {

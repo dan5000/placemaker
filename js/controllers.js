@@ -43,9 +43,7 @@ $scope.fname = 'atatat';
     //     getAll();
     // });
     //
-    Text.send('hello','all',3146804864);
-
-
+    Text.send('Beds are available at the Biddle House now.','all',3146804864);
 })
 
 .controller('AdminCommunityCtrl', function (Persons, $rootScope, $scope) {
@@ -67,7 +65,7 @@ $scope.fname = 'atatat';
                 {name:'joe'},
                 {name:'joe'},
                 {name:'joe'}
-            ]
+            ];
         });
 
     //
@@ -77,6 +75,28 @@ $scope.fname = 'atatat';
     // });
 
 })
+.controller('SurveyCtrl', function ($rootScope, $scope, $location, $state, Question, Persons) {
+   $scope.questions = [];
+   Form.read('580c1d4f2aceb73f22b0f284').then(function(response){
+     $scope.form = response.data;
+     var questions = $scope.form.questions
+     for(var qId in questions) {
+       Question.read(questions[qId]["$oid"]).then( function(response) {
+         $scope.questions.push(response.data)
+       }, function(failure) {
+         console.log(failure);
+       });
+     }
+   }, function(failure) {
+     console.log(failure)
+   });
+   textField = {};
+   dataField = [];
+   for (var q in $scope.questions){
+      dataField.push(q);
+   }
+})
+   
 
 .controller('FormCtrl', function ($rootScope, $scope, $location, $state, Form) {
       Form.all().then(function(response) {
@@ -97,12 +117,11 @@ $scope.fname = 'atatat';
         {"name": "True/False", "value": "Boolean"},
         {"name": "E-Mail", "value": "email"}
       ];
-      console.log($location.search().id)
-      Form.read($location.search().id).then(function(response){
+      Form.read("580c1d4f2aceb73f22b0f284").then(function(response){
         $scope.form = response.data;
         var questions = $scope.form.questions
         for(var qId in questions) {
-          Question.read(questions[qId]).then( function(response) {
+          Question.read(questions[qId]["$oid"]).then( function(response) {
             $scope.questions.push(response.data)
           }, function(failure) {
             console.log(failure);
@@ -147,7 +166,6 @@ $scope.fname = 'atatat';
       $scope.delete = function(item) {
         $scope.questions.splice($scope.questions.indexOf(item), 1);
       }
-      $scope.questions = [{"_id" : "1234", "content" : "When was the last time you ate a home-cooked meal", "tags" : ["Address",  "Meals"]}, {"_id" : "1235", "content" : "When was your last meal", "tags" : ["Meal"] }];
       $scope.tagData = {};
       $scope.tagFields = [{
         key: 'text',
@@ -192,6 +210,7 @@ $scope.fname = 'atatat';
      defaultValue: "Text",
      templateOptions: {
        type:'ion-select',
+       placeholder: 'text',
        label: 'What kind of response are you looking for?',
        options: options
      }
