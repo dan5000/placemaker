@@ -3,18 +3,19 @@ angular.module('SimpleRESTIonic.controllers', [])
 .controller('CheckinCtrl', function ($state, $rootScope, CheckinService, $scope) {
     // social.setFbKey({appId: '415413948489755'}); //, apiVersion: '2'
     function checkin() {
-        debugger
         CheckinService.checkin($scope.form)
             .then(function () {
+                debugger
                 onLogin();
             }, function (error) {
+                debugger
                 console.log(error);
             });
     }
 
     function onLogin() {
         $rootScope.$broadcast('authorized');
-        $state.go('tab.dashboard');
+        $state.go('tab.formcreator');
         // login.username = Backand.getUsername();
     }
 $scope.fname = 'atatat';

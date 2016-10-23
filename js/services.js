@@ -49,9 +49,7 @@ angular.module('SimpleRESTIonic.services', [])
         var service = this;        
         service.checkin= function(data){
              return $http.post('/test', data);//.then(function, errorCallback);
-        };
-
-    
+        };    
     })
 
     .service('AuthService', function($http){
