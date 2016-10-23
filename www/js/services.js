@@ -1,175 +1,196 @@
 angular.module('starter.services', [])
 
-    .service('CoCs', function ($http, $q) {
-        var service = this,
-            baseUrl = '/api/coc/';
+  .service('CoCs', function ($http, $q) {
+    var service = this,
+    baseUrl = '/api/coc/';
 
-        function getUrl() {
-            return 'http://localhost:5000' + baseUrl;
-        }
+    function getUrl() {
+      return 'http://localhost:5000' + baseUrl;
+    }
 
-        service.all = function () {
-            return $http.get(getUrl() + "all");
-        };
+    service.all = function () {
+      return $http.get(getUrl() + "all");
+    };
 
-        service.fetch = function (id) {
-            return $http.get(getUrl() + "read/" + id);
-        };
+    service.fetch = function (id) {
+      return $http.get(getUrl() + "read/" + id);
+    };
 
-        service.create = function (object) {
-            return $http.post(getUrl() + "create", object);
-        };
+    service.create = function (object) {
+      return $http.post(getUrl() + "create", object);
+    };
 
-        service.update = function (id, object) {
-            return $http.post(getUrl() + "update/" + id, object);
-        };
+    service.update = function (id, object) {
+      return $http.post(getUrl() + "update/" + id, object);
+    };
 
-        service.delete = function (id) {
-            return $http.delete(getUrl() + "delete/" + id);
-        };
-    })
+    service.delete = function (id) {
+      return $http.delete(getUrl() + "delete/" + id);
+    };
+  })
 
-    .service('Organizations', function ($http) {
-        var service = this,
-            baseUrl = '/api/organization/';
+  .service('Organizations', function ($http) {
+    var service = this,
+    baseUrl = '/api/organization/';
 
-        function getUrl() {
-            return 'http://localhost:5000' + baseUrl;
-        }
+    var dummy = {
+      name: "Test name",
+      limit: 174,
+      cannotAccept: ["male"]
+    };
 
-        service.all = function () {
-            return $http.get(getUrl() + "all");
-        };
+    function getUrl() {
+      return 'http://localhost:5000' + baseUrl;
+    }
 
-        service.fetch = function (id) {
-            return $http.get(getUrl() + "read/" + id);
-        };
+    service.all = function () {
+      //return $http.get(getUrl() + "all");
+      return [dummy];
+    };
 
-        service.create = function (object) {
-            return $http.post(getUrl() + "create", object);
-        };
+    service.fetch = function (id) {
+      return $http.get(getUrl() + "read/" + id);
+    };
 
-        service.update = function (id, object) {
-            return $http.post(getUrl() + "update/" + id, object);
-        };
+    service.create = function (object) {
+      return $http.post(getUrl() + "create", object);
+    };
 
-        service.delete = function (id) {
-            return $http.delete(getUrl() + "delete/" + id);
-        };
-    })
+    service.update = function (id, object) {
+      return $http.post(getUrl() + "update/" + id, object);
+    };
 
-    .service('Persons', function ($http) {
-        var service = this,
-            baseUrl = '/api/person/';
+    service.delete = function (id) {
+      return $http.delete(getUrl() + "delete/" + id);
+    };
+  })
 
-        function getUrl() {
-            return 'http://localhost:5000' + baseUrl;
-        }
+  .service('Persons', function ($http) {
+    var service = this,
+    baseUrl = '/api/person/';
 
-        service.all = function () {
-            return $http.get(getUrl() + "all");
-        };
+    function getUrl() {
+      return 'http://localhost:5000' + baseUrl;
+    }
 
-        service.fetch = function (id) {
-            return $http.get(getUrl() + "read/" + id);
-        };
+    service.all = function () {
+      return $http.get(getUrl() + "all");
+    };
 
-        service.create = function (object) {
-            return $http.post(getUrl() + "create", object);
-        };
+    service.fetch = function (id) {
+      return $http.get(getUrl() + "read/" + id);
+    };
 
-        service.update = function (id, object) {
-            return $http.post(getUrl() + "update/" + id, object);
-        };
+    service.create = function (object) {
+      return $http.post(getUrl() + "create", object);
+    };
 
-        service.delete = function (id) {
-            return $http.delete(getUrl() + "delete/" + id);
-        };
-    })
+    service.update = function (id, object) {
+      return $http.post(getUrl() + "update/" + id, object);
+    };
 
-    .service('Users', function ($http) {
-        var service = this,
-            baseUrl = '/api/user/';
+    service.delete = function (id) {
+      return $http.delete(getUrl() + "delete/" + id);
+    };
+  })
 
-        function getUrl() {
-            return 'http://localhost:5000' + baseUrl;
-        }
+  .service('Users', function ($http) {
+    var service = this,
+        baseUrl = '/api/user/';
 
-        service.all = function () {
-            return $http.get(getUrl() + "all");
-        };
+    function getUrl() {
+      return 'http://localhost:5000' + baseUrl;
+    }
 
-        service.fetch = function (id) {
-            return $http.get(getUrl() + "read/" + id);
-        };
+    service.all = function () {
+      return $http.get(getUrl() + "all");
+    };
 
-        service.create = function (object) {
-            return $http.post(getUrl() + "create", object);
-        };
+    service.fetch = function (id) {
+      return $http.get(getUrl() + "read/" + id);
+    };
 
-        service.update = function (id, object) {
-            return $http.post(getUrl() + "update/" + id, object);
-        };
+    service.create = function (object) {
+      return $http.post(getUrl() + "create", object);
+    };
 
-        service.delete = function (id) {
-            return $http.delete(getUrl() + "delete/" + id);
-        };
-    })
+    service.update = function (id, object) {
+      return $http.post(getUrl() + "update/" + id, object);
+    };
 
-    .service('Forms', function ($http) {
-        var service = this,
-            baseUrl = '/api/form/';
+    service.delete = function (id) {
+      return $http.delete(getUrl() + "delete/" + id);
+    };
+  })
 
-        function getUrl() {
-            return 'http://localhost:5000' + baseUrl;
-        }
+  .service('Forms', function ($http) {
+    var service = this,
+    baseUrl = '/api/form/';
 
-        service.all = function () {
-            return $http.get(getUrl() + "all");
-        };
+    function getUrl() {
+      return 'http://localhost:5000' + baseUrl;
+    }
 
-        service.fetch = function (id) {
-            return $http.get(getUrl() + "read/" + id);
-        };
+    service.all = function () {
+      return $http.get(getUrl() + "all");
+    };
 
-        service.create = function (object) {
-            return $http.post(getUrl() + "create", object);
-        };
+    service.fetch = function (id) {
+      return $http.get(getUrl() + "read/" + id);
+    };
 
-        service.update = function (id, object) {
-            return $http.post(getUrl() + "update/" + id, object);
-        };
+    service.create = function (object) {
+      return $http.post(getUrl() + "create", object);
+    };
 
-        service.delete = function (id) {
-            return $http.delete(getUrl() + "delete/" + id);
-        };
-    })
+    service.update = function (id, object) {
+      return $http.post(getUrl() + "update/" + id, object);
+    };
 
-    .service('Questions', function ($http) {
-        var service = this,
-            baseUrl = '/api/question/';
+    service.delete = function (id) {
+      return $http.delete(getUrl() + "delete/" + id);
+    };
+  })
 
-        function getUrl() {
-            return 'http://localhost:5000' + baseUrl;
-        }
+  .service('Questions', function ($http) {
+    var service = this,
+        baseUrl = '/api/question/';
 
-        service.all = function () {
-            return $http.get(getUrl() + "all");
-        };
+    function getUrl() {
+      return 'http://localhost:5000' + baseUrl;
+    }
 
-        service.fetch = function (id) {
-            return $http.get(getUrl() + "read/" + id);
-        };
+    service.all = function () {
+      return $http.get(getUrl() + "all");
+    };
 
-        service.create = function (object) {
-            return $http.post(getUrl() + "create", object);
-        };
+    service.fetch = function (id) {
+      return $http.get(getUrl() + "read/" + id);
+    };
 
-        service.update = function (id, object) {
-            return $http.post(getUrl() + "update/" + id, object);
-        };
+    service.create = function (object) {
+      return $http.post(getUrl() + "create", object);
+    };
 
-        service.delete = function (id) {
-            return $http.delete(getUrl() + "delete/" + id);
-        };
-    });
+    service.update = function (id, object) {
+      return $http.post(getUrl() + "update/" + id, object);
+    };
+
+    service.delete = function (id) {
+      return $http.delete(getUrl() + "delete/" + id);
+    };
+  })
+
+  .service('Users', function ($http) {
+    var service = this;
+    var currentUser = {
+      "name_info" : "Joe Smith",
+      "ssn_info" : "1234566",
+      "dob_info" : new Date("2013-01-01T00:00:00.000+0000"),
+      role: "admin"
+    };
+
+    service.current = function () {
+      return currentUser;
+    };
+  });
