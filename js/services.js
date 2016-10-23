@@ -46,12 +46,10 @@ angular.module('SimpleRESTIonic.services', [])
     })
 
     .service('CheckinService', function ($http) {
-        var service = this;
-
-        
-        service.checkin= function(data, config){
-            $http.post('/test', data, config).then(successCallback, errorCallback);
-        }
+        var service = this;        
+        service.checkin= function(data){
+             return $http.post('/test', data);//.then(function, errorCallback);
+        };
 
     
     })

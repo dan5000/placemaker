@@ -16,9 +16,8 @@ angular.module('SimpleRESTIonic', ['ionic', 'ion-sticky', 'formlyIonic', 'Simple
             // setup an abstract state for the tabs directive
             .state('checkin', {
                 url: '/checkin',
-                abstract: false,
                 templateUrl: 'templates/checkin.html',
-                controller: 'CheckinCtrl as checkin'
+                controller: 'CheckinCtrl'
             })
             .state('tab', {
                 url: '/tabs',

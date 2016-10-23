@@ -23,7 +23,7 @@
                 </div>
             </div> -->
 
-            <form ng-submit="checkin.signin()">
+            <form ng-submit="checkin()">
 
                 <div class="list padding-top">
 
@@ -35,13 +35,13 @@
                         <div class="row">
                             <div class="col">
                                 <label class="item item-input">
-                                    <input id="firstname" name="firstname" type="text" placeholder="Your first name" ng-model="checkin.fname">
+                                    <input id="firstname" name="firstname" type="text" placeholder="Your first name" ng-model="form.fname">
                                 </label>
                                 <label class="item item-input">
-                                    <input id="lastname" name="lastname" type="text" placeholder="Your Last name" ng-model="checkin.lname">
+                                    <input id="lastname" name="lastname" type="text" placeholder="Your Last name" ng-model="form.lname">
                                 </label>
                                 <label class="item item-input">
-                                    <input id="lastname" name="lastname" type="number" placeholder="The last 4 digits of your social" ng-model="checkin.ssn">
+                                    <input id="lastname" name="lastname" type="number" placeholder="The last 4 digits of your social" ng-model="form.ssn">
                                 </label>
                             </div>
                         </div>
@@ -54,7 +54,7 @@
                     </div>
 
                 </form>
-                <h4 style="color:red;" ng-bind="checkin.error"></h4>
+                <h4 style="color:red;" ng-bind="error"></h4>
             </div>
         </ion-content>
     </ion-view>
